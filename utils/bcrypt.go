@@ -48,8 +48,8 @@ func GenerateToken(username string) string {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
-	t, _ := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
-	//t, _ := token.SignedString([]byte("{*aKV|~ACD$Gm-Sk"))
+	// t, _ := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
+	t, _ := token.SignedString([]byte("{*aKV|~ACD$Gm-Sk"))
 	return t
 
 }

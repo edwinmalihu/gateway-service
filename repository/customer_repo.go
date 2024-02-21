@@ -3,7 +3,6 @@ package repository
 import (
 	"auth-services/model"
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/go-resty/resty/v2"
@@ -45,7 +44,8 @@ func (r customerRepository) Login(req model.Login) (model.LoginResponse, *resty.
 	resp, err := r.client.R().
 		SetBody(req).
 		SetResult(&result).
-		Post(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_CUSTOMER"), "/api/login"))
+		Post("http://localhost:8082/api/login")
+		//Post(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_CUSTOMER"), "/api/login"))
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)

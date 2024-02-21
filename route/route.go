@@ -40,8 +40,18 @@ func SetupRoutes(db *gorm.DB) {
 	customerController := controller.NewCustomerController(customerRepo)
 	apiRoutes := httpRouter.Group("/api")
 	{
-		apiRoutes.POST("/signin", customerController.Register)
+		apiRoutes.POST("/signin", customerController.Login)
 		apiRoutes.POST("/register", customerController.Register)
+	}
+
+	cartegoryRepo := repository.NewCategoryRepo()
+	categoryController := controller.NewCategoryController(cartegoryRepo)
+	categorGroup := apiRoutes.Group("/category", middleware.AuthorizeJWT())
+	{
+		categorGroup.POST("/add", categoryController.AddCategory)
+		categorGroup.POST("/update", categoryController.UpdateCategory)
+		categorGroup.GET("/detail", categoryController.DetailCategory)
+		categorGroup.GET("/list", categoryController.ListCategory)
 	}
 
 	//httpRouter.Run(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
