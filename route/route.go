@@ -40,8 +40,8 @@ func SetupRoutes(db *gorm.DB) {
 	customerController := controller.NewCustomerController(customerRepo)
 	apiRoutes := httpRouter.Group("/api")
 	{
-		apiRoutes.POST("/signin", customerController.LoginCustomer)
-		apiRoutes.POST("/register", customerController.LoginCustomer)
+		apiRoutes.POST("/signin", customerController.Register)
+		apiRoutes.POST("/register", customerController.Register)
 	}
 
 	//httpRouter.Run(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))

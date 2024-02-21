@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"time"
-
-	"github.com/dgrijalva/jwt-go"
+	"auth-services/model"
+	"auth-services/route"
 )
 
 func main() {
@@ -30,17 +28,17 @@ func main() {
 	// t, _ := token.SignedString([]byte("{*aKV|~ACD$Gm-Sk"))
 	// fmt.Printf("%s\n", t)
 
-	claims := jwt.MapClaims{
-		"exp":      time.Now().Add(time.Hour * 3).Unix(),
-		"iat":      time.Now().Unix(),
-		"username": "whs_admin1",
-	}
+	// claims := jwt.MapClaims{
+	// 	"exp":      time.Now().Add(time.Hour * 3).Unix(),
+	// 	"iat":      time.Now().Unix(),
+	// 	"username": "whs_admin1",
+	// }
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
-	t, _ := token.SignedString([]byte("{*aKV|~ACD$Gm-Sk"))
-	fmt.Printf("%s\n", t)
+	// token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
+	// t, _ := token.SignedString([]byte("{*aKV|~ACD$Gm-Sk"))
+	// fmt.Printf("%s\n", t)
 
-	// db, _ := model.DBConnection()
-	// route.SetupRoutes(db)
+	db, _ := model.DBConnection()
+	route.SetupRoutes(db)
 
 }

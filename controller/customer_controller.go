@@ -10,7 +10,7 @@ import (
 )
 
 type CustomerController interface {
-	LoginCustomer(*gin.Context)
+	Register(*gin.Context)
 }
 
 type customerController struct {
@@ -18,11 +18,11 @@ type customerController struct {
 }
 
 // LoginCustomer implements CustomerController.
-func (r customerController) LoginCustomer(ctx *gin.Context) {
-	var req model.Login
+func (r customerController) Register(ctx *gin.Context) {
+	var req model.AddCustomer
 	ctx.ShouldBind(&req)
 
-	data, resp, err := r.allRepo.Login(req)
+	data, resp, err := r.allRepo.Register(req)
 	response := &model.Response{}
 	if err != nil {
 		response.Success = false
@@ -43,6 +43,8 @@ func (r customerController) LoginCustomer(ctx *gin.Context) {
 		ctx.JSON(resp.StatusCode(), response)
 		return
 	}
+
+	data.Password = ""
 
 	response.Success = true
 	response.Status = http.StatusOK
