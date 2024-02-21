@@ -54,6 +54,17 @@ func SetupRoutes(db *gorm.DB) {
 		categorGroup.GET("/list", categoryController.ListCategory)
 	}
 
+	productRepo := repository.NewProductRepo()
+	productController := controller.NewProductController(productRepo)
+	proudctGroup := apiRoutes.Group("/product", middleware.AuthorizeJWT())
+	{
+		proudctGroup.POST("/add", productController.AddProduct)
+		proudctGroup.POST("/update", productController.UpdateProduct)
+		proudctGroup.GET("/list", productController.ListProduct)
+		proudctGroup.GET("/detail", productController.DetailProduct)
+		proudctGroup.GET("/listby-category", productController.ListProductByCategory)
+	}
+
 	//httpRouter.Run(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
 	httpRouter.Run(":8081")
 }
