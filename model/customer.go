@@ -20,6 +20,6 @@ type Login struct {
 
 type LoginResponse struct {
 	Username string `json:"username"`
-	Msg      string `json:messege`
+	Msg      string `json:"messege"`
 	Token    string `json:"token"`
 }

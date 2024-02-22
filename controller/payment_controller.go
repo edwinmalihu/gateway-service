@@ -18,6 +18,14 @@ type paymentController struct {
 	allRepo repository.PaymentRepo
 }
 
+// CreatePayment	godoc
+// @Summary Create Paymenr
+// @Description Add order to payment
+// @param	cary body model.RequestAddPayment{} true "Payment Order"
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseSuccessPayment{}
+// @Router /api/payment/add [post]
+// @Tags payment-service
 // AddPayment implements PaymentController.
 func (r paymentController) AddPayment(ctx *gin.Context) {
 	var req model.RequestAddPayment
@@ -56,6 +64,14 @@ func (r paymentController) AddPayment(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// DeletePayment	godoc
+// @Summary Delete Payment
+// @Description Delete Payment Order
+// @Produce applicaton/json
+// @Success 200 {object} model.Response{}
+// @Router /api/payment/delete [delete]
+// @Param payment_id query string true "Payment ID"
+// @Tags payment-service
 // DeletePayment implements PaymentController.
 func (r paymentController) DeletePayment(ctx *gin.Context) {
 	var req model.RequestByIdPayment

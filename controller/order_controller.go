@@ -17,6 +17,14 @@ type orderController struct {
 	allRepo repository.OrderRepo
 }
 
+// CreateOrder	godoc
+// @Summary Create Order
+// @Description Add Product to Order
+// @param	cary body model.AddOrder{} true "Create Order"
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponsOrder{}
+// @Router /api/order/add [post]
+// @Tags order-service
 // AddOrder implements OrderController.
 func (r orderController) AddOrder(ctx *gin.Context) {
 	var req model.AddOrder

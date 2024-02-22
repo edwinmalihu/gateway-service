@@ -20,6 +20,14 @@ type cartController struct {
 	allRepo repository.CartRepo
 }
 
+// CreateCart	godoc
+// @Summary Create Cart
+// @Description Add Product to Cart
+// @param	cary body model.RequestAddCart{} true "Create Cart"
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseSuccessCart{}
+// @Router /api/shop/add [post]
+// @Tags cart-service
 // AddCart implements CartController.
 func (r cartController) AddCart(ctx *gin.Context) {
 	var req model.RequestAddCart
@@ -58,6 +66,14 @@ func (r cartController) AddCart(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// DeleteCart	godoc
+// @Summary Delete Cart
+// @Description Delete Product from Cart
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseCart{}
+// @Router /api/shop/delete [delete]
+// @Param cart_id query string true "cart ID"
+// @Tags cart-service
 // DeleteCart implements CartController.
 func (r cartController) DeleteCart(ctx *gin.Context) {
 	var req model.RequesCardById
@@ -96,6 +112,14 @@ func (r cartController) DeleteCart(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// DetailCart	godoc
+// @Summary Detail Cart
+// @Description Detail Product from Cart
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseCart{}
+// @Router /api/shop/detail [get]
+// @Param cart_id query string true "cart ID"
+// @Tags cart-service
 // DetailCart implements CartController.
 func (r cartController) DetailCart(ctx *gin.Context) {
 	var req model.RequesCardById
@@ -134,6 +158,13 @@ func (r cartController) DetailCart(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// ListCart	godoc
+// @Summary List Cart
+// @Description List Cart
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseCart{}
+// @Router /api/shop/list [get]
+// @Tags cart-service
 // ListCart implements CartController.
 func (r cartController) ListCart(ctx *gin.Context) {
 

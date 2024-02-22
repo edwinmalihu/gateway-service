@@ -11,6 +11,8 @@ import (
 
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	"github.com/gin-gonic/gin"
+	swaggerFile "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/gorm"
 )
 
@@ -19,6 +21,8 @@ func SetupRoutes(db *gorm.DB) {
 	httpRouter := gin.Default()
 
 	httpRouter.Use(middleware.CORSMiddleware())
+
+	httpRouter.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFile.Handler))
 
 	// Initialize  casbin adapter
 	adapter, err := gormadapter.NewAdapterByDB(db)
@@ -92,5 +96,5 @@ func SetupRoutes(db *gorm.DB) {
 	}
 
 	httpRouter.Run(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
-	// httpRouter.Run(":8081")
+	//httpRouter.Run(":8089")
 }

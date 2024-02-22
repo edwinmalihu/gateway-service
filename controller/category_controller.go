@@ -20,6 +20,14 @@ type categoryController struct {
 	allRepo repository.CategoryRepo
 }
 
+// AddCategory	godoc
+// @Summary Create Category
+// @Description Create Category
+// @param	signin body model.RequestAdd{} true "Signin"
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseCategory{}
+// @Router /category/add [post]
+// @Tags category-service
 // AddCategory implements CategoryController.
 func (r categoryController) AddCategory(ctx *gin.Context) {
 	var req model.RequestAdd
@@ -58,6 +66,14 @@ func (r categoryController) AddCategory(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// DetailCategory	godoc
+// @Summary Detail Category
+// @Description Detail Category
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseCategory{}
+// @Router /category/detail [get]
+// @Param category_id query string true "Category ID"
+// @Tags category-service
 // DetailCategory implements CategoryController.
 func (r categoryController) DetailCategory(ctx *gin.Context) {
 	var req model.RequesListCategoryById
@@ -96,6 +112,13 @@ func (r categoryController) DetailCategory(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// ListCategory	godoc
+// @Summary List Category
+// @Description List Categor
+// @Produce applicaton/json
+// @Success 200 {object} []model.ResponseCategory{}
+// @Router /category/list [get]
+// @Tags category-service
 // ListCategory implements CategoryController.
 func (r categoryController) ListCategory(ctx *gin.Context) {
 
@@ -129,6 +152,14 @@ func (r categoryController) ListCategory(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// UpdateCategory	godoc
+// @Summary Update Category
+// @Description Update Category
+// @param	signin body model.RequestUpdateCategory{} true "Signin"
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseCategory{}
+// @Router /category/update [post]
+// @Tags category-service
 // UpdateCategory implements CategoryController.
 func (r categoryController) UpdateCategory(ctx *gin.Context) {
 	var req model.RequestUpdateCategory

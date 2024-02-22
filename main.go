@@ -3,6 +3,8 @@ package main
 import (
 	"auth-services/model"
 	"auth-services/route"
+
+	_ "auth-services/docs"
 )
 
 func main() {
@@ -37,6 +39,13 @@ func main() {
 	// token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
 	// t, _ := token.SignedString([]byte("{*aKV|~ACD$Gm-Sk"))
 	// fmt.Printf("%s\n", t)
+
+	// @title	Synapsis E-commerce API
+	// @description	Service API in Go Using Gin framework
+	// @host	43.218.113.72:8081
+
+	// @port	running in port 8081
+	// @BasePath	/api
 
 	db, _ := model.DBConnection()
 	route.SetupRoutes(db)

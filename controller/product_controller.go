@@ -21,6 +21,14 @@ type productController struct {
 	allRepo repository.ProductRepo
 }
 
+// CreateProduct	godoc
+// @Summary Create Product
+// @Description Create Product
+// @param	CreateProduct body model.RequestAddProduct{} true "Create Product"
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseSucessProduct{}
+// @Router /product/add [post]
+// @Tags product-service
 // AddProduct implements ProductController.
 func (r productController) AddProduct(ctx *gin.Context) {
 	var req model.RequestAddProduct
@@ -59,6 +67,14 @@ func (r productController) AddProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// DetailProduct	godoc
+// @Summary Detail Product
+// @Description Detail Product
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseDetailProduct{}
+// @Router /product/detail [get]
+// @Param product_id query string true "Product ID"
+// @Tags product-service
 // DetailProduct implements ProductController.
 func (r productController) DetailProduct(ctx *gin.Context) {
 	var req model.RequesByIdProduct
@@ -97,6 +113,13 @@ func (r productController) DetailProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// ListProduct	godoc
+// @Summary List Product
+// @Description List Product
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseDetailProduct{}
+// @Router /product/list [get]
+// @Tags product-service
 // ListProduct implements ProductController.
 func (r productController) ListProduct(ctx *gin.Context) {
 	data, resp, err := r.allRepo.ListProduct()
@@ -129,6 +152,14 @@ func (r productController) ListProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// ListProductByCategory	godoc
+// @Summary List Product by Category
+// @Description List Product by Category
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseDetailProduct{}
+// @Router /product/listby-category [get]
+// @Param category_id query string true "Category ID"
+// @Tags product-service
 // ListProductByCategory implements ProductController.
 func (r productController) ListProductByCategory(ctx *gin.Context) {
 	var req model.RequesByIdCategory
@@ -168,6 +199,14 @@ func (r productController) ListProductByCategory(ctx *gin.Context) {
 
 }
 
+// UpdateProduct	godoc
+// @Summary Update Product
+// @Description Update Product
+// @param	UpdateProduct body model.RequestUpdateProduct{} true "Update Product"
+// @Produce applicaton/json
+// @Success 200 {object} model.ResponseSucessProduct{}
+// @Router /product/update [post]
+// @Tags product-service
 // UpdateProduct implements ProductController.
 func (r productController) UpdateProduct(ctx *gin.Context) {
 	var req model.RequestUpdateProduct

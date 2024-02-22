@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"net/http"
 
+	_ "auth-services/docs"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,6 +21,14 @@ type customerController struct {
 	allRepo repository.CustomerRepository
 }
 
+// Signin	godoc
+// @Summary Signin
+// @Description Authentication and Unauthorized User
+// @param	signin body model.Login{} true "Signin"
+// @Produce applicaton/json
+// @Success 200 {object} model.Login{}
+// @Router /signin/ [post]
+// @Tags customer-service
 // Login implements CustomerController.
 func (r customerController) Login(ctx *gin.Context) {
 	var req model.Login
@@ -60,6 +70,14 @@ func (r customerController) Login(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// Register	godoc
+// @Summary Register
+// @Description Create User
+// @param	signin body model.AddCustomer{} true "Signin"
+// @Produce applicaton/json
+// @Success 200 {object} model.SuccessAddCustomer{}
+// @Router /register/ [post]
+// @Tags customer-service
 // LoginCustomer implements CustomerController.
 func (r customerController) Register(ctx *gin.Context) {
 	var req model.AddCustomer
