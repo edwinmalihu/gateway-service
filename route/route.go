@@ -5,6 +5,7 @@ import (
 	"auth-services/middleware"
 	"auth-services/repository"
 	"fmt"
+	"os"
 
 	"github.com/casbin/casbin/v2"
 
@@ -90,6 +91,6 @@ func SetupRoutes(db *gorm.DB) {
 		paymentGroup.DELETE("/delete", paymentController.DeletePayment)
 	}
 
-	//httpRouter.Run(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
-	httpRouter.Run(":8081")
+	httpRouter.Run(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
+	// httpRouter.Run(":8081")
 }

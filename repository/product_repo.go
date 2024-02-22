@@ -3,6 +3,7 @@ package repository
 import (
 	"auth-services/model"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/go-resty/resty/v2"
@@ -26,8 +27,8 @@ func (r productRepo) AddProduct(req model.RequestAddProduct) (model.ResponseSuce
 	resp, err := r.client.R().
 		SetBody(req).
 		SetResult(&result).
-		Post("http://localhost:8086/api/add")
-		//Post(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_CUSTOMER"), "/api/add"))
+		Post(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_PRODUCT"), "/api/add"))
+		//Post("http://localhost:8086/api/add")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)
@@ -50,8 +51,8 @@ func (r productRepo) DetailProduct(req model.RequesByIdProduct) (model.ResponseD
 			"product_id": req.Id,
 		}).
 		SetResult(&result).
-		Get("http://localhost:8085/api/detail")
-		//Get(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_RATE"), "/api/detail-lps"))
+		Get(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_PRODUCT"), "/api/detail-lps"))
+		//Get("http://localhost:8085/api/detail")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)
@@ -71,8 +72,8 @@ func (r productRepo) ListProduct() ([]model.ResponseDetailProduct, *resty.Respon
 	var result []model.ResponseDetailProduct
 	resp, err := r.client.R().
 		SetResult(&result).
-		Get("http://localhost:8085/api/list")
-		//Get(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_RATE"), "/api/detail-lps"))
+		Get(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_PRODUCT"), "/api/detail-lps"))
+		//Get("http://localhost:8085/api/list")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)
@@ -95,8 +96,8 @@ func (r productRepo) ListProductByCategory(req model.RequesByIdCategory) ([]mode
 			"category_id": req.Id,
 		}).
 		SetResult(&result).
-		Get("http://localhost:8085/api/list-ProductByCategory")
-		//Get(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_RATE"), "/api/detail-lps"))
+		Get(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_PRODUCT"), "/api/detail-lps"))
+		//Get("http://localhost:8085/api/list-ProductByCategory")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)
@@ -117,8 +118,8 @@ func (r productRepo) UpdateProduct(req model.RequestUpdateProduct) (model.Respon
 	resp, err := r.client.R().
 		SetBody(req).
 		SetResult(&result).
-		Post("http://localhost:8086/api/update")
-		//Post(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_CUSTOMER"), "/api/add"))
+		Post(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_PRODUCT"), "/api/add"))
+		//Post("http://localhost:8086/api/update")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)

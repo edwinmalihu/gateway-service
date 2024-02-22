@@ -46,8 +46,8 @@ func AuthorizeJWT() gin.HandlerFunc {
 					var w http.ResponseWriter = ctx.Writer
 					var r *http.Request = ctx.Request
 
-					getSession, err := store.Get(r, "session-skk")
-					fmt.Println("session-skk", getSession)
+					getSession, err := store.Get(r, "session-synapsis")
+					fmt.Println("session-synapsis", getSession)
 					if err != nil {
 						http.Error(w, err.Error(), http.StatusInternalServerError)
 						return
@@ -66,7 +66,7 @@ func AuthorizeJWT() gin.HandlerFunc {
 						diff := localTime.Sub(t)
 						idle_timeout, _ := strconv.Atoi(os.Getenv("IDLE_TIMEOUT"))
 						if int(diff.Minutes()) > idle_timeout {
-							session, _ := store.Get(r, "session-skk")
+							session, _ := store.Get(r, "session-synapsis")
 							session.Values["last_hit"] = nil
 							err := session.Save(r, w)
 							if err != nil {
@@ -74,8 +74,8 @@ func AuthorizeJWT() gin.HandlerFunc {
 								return
 							}
 						} else {
-							session, err := store.Get(r, "session-skk")
-							fmt.Println("session-skk", session)
+							session, err := store.Get(r, "session-synapsis")
+							fmt.Println("session-synapsis", session)
 							if err != nil {
 								http.Error(w, err.Error(), http.StatusInternalServerError)
 								return
@@ -90,8 +90,8 @@ func AuthorizeJWT() gin.HandlerFunc {
 							ctx.Set("username", claims["username"])
 						}
 					} else {
-						session, err := store.Get(r, "session-skk")
-						fmt.Println("session-skk", session)
+						session, err := store.Get(r, "session-synapsis")
+						fmt.Println("session-synapsis", session)
 						if err != nil {
 							http.Error(w, err.Error(), http.StatusInternalServerError)
 							return

@@ -3,6 +3,7 @@ package repository
 import (
 	"auth-services/model"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/go-resty/resty/v2"
@@ -27,8 +28,8 @@ func (r categoryRepo) DetailCategory(req model.RequesListCategoryById) (model.Re
 			"category_id": req.Id,
 		}).
 		SetResult(&result).
-		Get("http://localhost:8085/api/detail")
-		//Get(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_RATE"), "/api/detail-lps"))
+		Get(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_CATEGORY"), "/api/detail-lps"))
+		//Get("http://localhost:8085/api/detail")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)
@@ -48,8 +49,8 @@ func (r categoryRepo) ListCategory() ([]model.ResponseCategory, *resty.Response,
 	var result []model.ResponseCategory
 	resp, err := r.client.R().
 		SetResult(&result).
-		Get("http://localhost:8085/api/list")
-		//Get(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_RATE"), "/api/list-libor"))
+		Get(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_CATEGORY"), "/api/list-libor"))
+		//Get("http://localhost:8085/api/list")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)
@@ -70,8 +71,8 @@ func (r categoryRepo) UpdateCategory(req model.RequestUpdateCategory) (model.Res
 	resp, err := r.client.R().
 		SetBody(req).
 		SetResult(&result).
-		Post("http://localhost:8085/api/update")
-		//Post(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_CUSTOMER"), "/api/add"))
+		Post(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_CATEGORY"), "/api/add"))
+		//Post("http://localhost:8085/api/update")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)
@@ -92,8 +93,8 @@ func (r categoryRepo) AddCategory(req model.RequestAdd) (model.ResponseCategory,
 	resp, err := r.client.R().
 		SetBody(req).
 		SetResult(&result).
-		Post("http://localhost:8085/api/add")
-		//Post(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_CUSTOMER"), "/api/add"))
+		Post(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_CATEGORY"), "/api/add"))
+		//Post("http://localhost:8085/api/add")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)

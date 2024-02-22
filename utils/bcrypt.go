@@ -48,8 +48,8 @@ func GenerateToken(username string) string {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
-	// t, _ := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
-	t, _ := token.SignedString([]byte("{*aKV|~ACD$Gm-Sk"))
+	t, _ := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
+	//t, _ := token.SignedString([]byte("{*aKV|~ACD$Gm-Sk"))
 	return t
 
 }
@@ -76,8 +76,8 @@ func ValidateToken(token string) (*jwt.Token, error) {
 			//nil secret key
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
-		//return []byte(os.Getenv("JWT_SECRET")), nil
-		return []byte("{*aKV|~ACD$Gm-Sk"), nil
+		return []byte(os.Getenv("JWT_SECRET")), nil
+		//return []byte("{*aKV|~ACD$Gm-Sk"), nil
 	})
 }
 

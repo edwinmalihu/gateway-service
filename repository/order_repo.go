@@ -3,6 +3,7 @@ package repository
 import (
 	"auth-services/model"
 	"fmt"
+	"os"
 
 	"github.com/go-resty/resty/v2"
 )
@@ -21,8 +22,8 @@ func (r orderRepo) AddOrder(req model.AddOrder) (model.ResponsOrder, *resty.Resp
 	resp, err := r.client.R().
 		SetBody(req).
 		SetResult(&result).
-		Post("http://localhost:8087/api/add")
-		//Post(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_CUSTOMER"), "/api/add"))
+		Post(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_ORDER"), "/api/add"))
+		//Post("http://localhost:8087/api/add")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)

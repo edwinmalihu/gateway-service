@@ -3,6 +3,7 @@ package repository
 import (
 	"auth-services/model"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/go-resty/resty/v2"
@@ -23,8 +24,8 @@ func (r paymentRepo) AddPayment(req model.RequestAddPayment) (model.ResponseSucc
 	resp, err := r.client.R().
 		SetBody(req).
 		SetResult(&result).
-		Post("http://localhost:8088/api/add")
-		//Post(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_CUSTOMER"), "/api/add"))
+		Post(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_PAYMENT"), "/api/add"))
+		//Post("http://localhost:8088/api/add")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)
@@ -47,8 +48,8 @@ func (r paymentRepo) DeletePayment(req model.RequestByIdPayment) (model.Response
 			"payment_id": req.PaymentID,
 		}).
 		SetResult(&result).
-		Delete("http://localhost:8088/api/delete")
-		//Get(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_RATE"), "/api/detail-lps"))
+		Get(fmt.Sprintf("%s%s%s", "http://", os.Getenv("SERVICE_HOST_PAYMENT"), "/api/detail-lps"))
+		//Delete("http://localhost:8088/api/delete")
 
 	fmt.Println("Response Info:")
 	fmt.Println("  Error      :", err)
