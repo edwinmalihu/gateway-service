@@ -2,6 +2,7 @@ package repository
 
 import (
 	"auth-services/model"
+	"fmt"
 	"time"
 
 	"github.com/go-resty/resty/v2"
@@ -20,22 +21,94 @@ type cartRepo struct {
 
 // AddCart implements CartRepo.
 func (r cartRepo) AddCart(req model.RequestAddCart) (model.ResponseSuccessCart, *resty.Response, error) {
-	panic("unimplemented")
+	var result model.ResponseSuccessCart
+	resp, err := r.client.R().
+		SetBody(req).
+		SetResult(&result).
+		Post("http://localhost:8087/api/add")
+		//Post(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_CUSTOMER"), "/api/add"))
+
+	fmt.Println("Response Info:")
+	fmt.Println("  Error      :", err)
+	fmt.Println("  Status Code:", resp.StatusCode())
+	fmt.Println("  Status     :", resp.Status())
+	fmt.Println("  Proto      :", resp.Proto())
+	fmt.Println("  Time       :", resp.Time())
+	fmt.Println("  Received At:", resp.ReceivedAt())
+	fmt.Println("  Body       :\n", resp)
+	fmt.Println()
+
+	return result, resp, err
+
 }
 
 // DeleteCart implements CartRepo.
 func (r cartRepo) DeleteCart(req model.RequesCardById) (model.ResponseCart, *resty.Response, error) {
-	panic("unimplemented")
+	var result model.ResponseCart
+	resp, err := r.client.R().
+		SetQueryParams(map[string]string{
+			"cart_id": req.Id,
+		}).
+		SetResult(&result).
+		Delete("http://localhost:8085/api/delete")
+		//Get(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_RATE"), "/api/detail-lps"))
+
+	fmt.Println("Response Info:")
+	fmt.Println("  Error      :", err)
+	fmt.Println("  Status Code:", resp.StatusCode())
+	fmt.Println("  Status     :", resp.Status())
+	fmt.Println("  Proto      :", resp.Proto())
+	fmt.Println("  Time       :", resp.Time())
+	fmt.Println("  Received At:", resp.ReceivedAt())
+	fmt.Println("  Body       :\n", resp)
+	fmt.Println()
+
+	return result, resp, err
 }
 
 // DetailCart implements CartRepo.
 func (r cartRepo) DetailCart(req model.RequesCardById) (model.ResponseCart, *resty.Response, error) {
-	panic("unimplemented")
+	var result model.ResponseCart
+	resp, err := r.client.R().
+		SetQueryParams(map[string]string{
+			"cart_id": req.Id,
+		}).
+		SetResult(&result).
+		Get("http://localhost:8085/api/detail")
+		//Get(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_RATE"), "/api/detail-lps"))
+
+	fmt.Println("Response Info:")
+	fmt.Println("  Error      :", err)
+	fmt.Println("  Status Code:", resp.StatusCode())
+	fmt.Println("  Status     :", resp.Status())
+	fmt.Println("  Proto      :", resp.Proto())
+	fmt.Println("  Time       :", resp.Time())
+	fmt.Println("  Received At:", resp.ReceivedAt())
+	fmt.Println("  Body       :\n", resp)
+	fmt.Println()
+
+	return result, resp, err
 }
 
 // ListCart implements CartRepo.
 func (r cartRepo) ListCart() ([]model.ResponseCart, *resty.Response, error) {
-	panic("unimplemented")
+	var result []model.ResponseCart
+	resp, err := r.client.R().
+		SetResult(&result).
+		Get("http://localhost:8085/api/list")
+		//Get(fmt.Sprintf("%s%s", os.Getenv("SERVICE_HOST_RATE"), "/api/detail-lps"))
+
+	fmt.Println("Response Info:")
+	fmt.Println("  Error      :", err)
+	fmt.Println("  Status Code:", resp.StatusCode())
+	fmt.Println("  Status     :", resp.Status())
+	fmt.Println("  Proto      :", resp.Proto())
+	fmt.Println("  Time       :", resp.Time())
+	fmt.Println("  Received At:", resp.ReceivedAt())
+	fmt.Println("  Body       :\n", resp)
+	fmt.Println()
+
+	return result, resp, err
 }
 
 func NewCartRepo() CartRepo {

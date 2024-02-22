@@ -65,6 +65,31 @@ func SetupRoutes(db *gorm.DB) {
 		proudctGroup.GET("/listby-category", productController.ListProductByCategory)
 	}
 
+	cartRepo := repository.NewCartRepo()
+	cartController := controller.NewCartController(cartRepo)
+	cartGroup := httpRouter.Group("/shop", middleware.AuthorizeJWT())
+	{
+		cartGroup.POST("/add", cartController.AddCart)
+		cartGroup.GET("/detail", cartController.DetailCart)
+		cartGroup.DELETE("/delete", cartController.DeleteCart)
+		cartGroup.GET("/list", cartController.ListCart)
+	}
+
+	orderRepo := repository.NewOrderRepo()
+	orderController := controller.NewOrderController(orderRepo)
+	orderGroup := httpRouter.Group("/order", middleware.AuthorizeJWT())
+	{
+		orderGroup.POST("/add", orderController.AddOrder)
+	}
+
+	paymentRepo := repository.NewPaymentRepo()
+	paymentController := controller.NewPaymentController(paymentRepo)
+	paymentGroup := httpRouter.Group("/payment", middleware.AuthorizeJWT())
+	{
+		paymentGroup.POST("/add", paymentController.AddPayment)
+		paymentGroup.DELETE("/delete", paymentController.DeletePayment)
+	}
+
 	//httpRouter.Run(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
 	httpRouter.Run(":8081")
 }
